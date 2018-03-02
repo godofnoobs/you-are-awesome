@@ -21,7 +21,7 @@ const incrementor = () => {
 const asyncIncrementor = () => {
 };
 const createIncrementer = function () {
-  
+
 };
 
 // return same argument not earlier than in one second, and not later, than in two
@@ -31,7 +31,15 @@ const returnBackInSecond = (x) => {
   });
   return promise;
 }
-const getDeepPropertiesCount = () => {};
+const getDeepPropertiesCount = (obj) => {
+  var keys = Object.getOwnPropertyNames(obj);
+  var count = keys.length;
+  for (var i = 0; i < keys.length; i++) {
+      var t = obj[keys[i]];
+      count += getDeepPropertiesCount(t);
+  }
+  return count;
+};
 const createSerializedObject = () => {};
 const toBuffer = () => {};
 const sortByProto = () => {};
