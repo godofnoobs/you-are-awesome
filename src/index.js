@@ -6,18 +6,31 @@ const createNotEnumerableProperty = function(pr) {
   Object.prototype[pr] = 'value';
   return pr;
 };
-/*const createNotEnumerableProperty = function(pr) {
-  var value = {toString() {return 'value'}};
-  Object.defineProperty(value, toString(), {enumerable:false});
-  return '__proto__';
-};*/
-const createProtoMagicObject = () => {};
-const incrementor = () => {};
-const asyncIncrementor = () => {};
-const createIncrementer = () => {};
+const createProtoMagicObject = () => {
+  var a = new Function();
+  a.__proto__ = undefined;
+  a.prototype = a.__proto__;
+  return a;
+};
+var value = 0;
+Function.prototype.valueOf = function () {return value;};
+const incrementor = () => {
+  value++;
+  return incrementor;
+};
+const asyncIncrementor = () => {
+};
+const createIncrementer = function () {
+  
+};
 
 // return same argument not earlier than in one second, and not later, than in two
-const returnBackInSecond = () => {};
+const returnBackInSecond = (x) => {
+  var promise = new Promise((resolve, reject) => {
+    setTimeout(() => {resolve(x)}, 1000);
+  });
+  return promise;
+}
 const getDeepPropertiesCount = () => {};
 const createSerializedObject = () => {};
 const toBuffer = () => {};
