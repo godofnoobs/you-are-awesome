@@ -25,9 +25,30 @@ async function asyncIncrementor () {
   });
   return promise;
 };
-const createIncrementer = function () {
 
+var gen = {from: 1, to: Infinity,
+
+  [Symbol.iterator]() {
+    return this;
+  },
+
+  next() {
+    if (this.current === undefined) {
+      this.current = this.from;
+    }
+    return {
+        done: false,
+        value: this.current++
+      };
+    }
 };
+
+
+const createIncrementer = function () {
+  return gen;
+}
+
+
 
 // return same argument not earlier than in one second, and not later, than in two
 const returnBackInSecond = (x) => {
