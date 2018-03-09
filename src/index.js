@@ -18,7 +18,12 @@ const incrementor = () => {
   value++;
   return incrementor;
 };
-const asyncIncrementor = () => {
+var value1 = 1;
+async function asyncIncrementor () {
+  var promise = new Promise((resolve) => {
+    resolve(value1++);
+  });
+  return promise;
 };
 const createIncrementer = function () {
 
